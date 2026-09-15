@@ -74,11 +74,11 @@ Geometric mean (ns/op) across all tested collection sizes (10,000–100,000 elem
 | `clear()`                 | 113,539.7         | 109,829                | 1.03x  | **Statistically Equivalent** |
 | `contains(Object)`        | 12,322.1          | 47,107.1               | 3.82x  |            **V1**            |
 | `containsAll(Collection)` | 45,507.6          | 433,584.9              | 9.53x  |            **V1**            |
-| `element()`               | 25.6              | 36                     | 1.41x  |            **V1**            |
-| `isEmpty()`               | 25.9              | 33.1                   | 1.28x  |            **V1**            |
+| `element()`               | 25.6              | 36                     | 1.41x  | **Statistically Equivalent** |
+| `isEmpty()`               | 25.9              | 33.1                   | 1.28x  | **Statistically Equivalent** |
 | `iterator()`              | 21,729.7          | 69,208.2               | 3.18x  |            **V1**            |
 | `offer(E)`                | 117,795.3         | 112,015.8              | 1.05x  | **Statistically Equivalent** |
-| `peek()`                  | 27.6              | 34.2                   | 1.24x  |            **V1**            |
+| `peek()`                  | 27.6              | 34.2                   | 1.24x  | **Statistically Equivalent** |
 | `poll()`                  | 84,599.3          | 108,959.9              | 1.29x  |            **V1**            |
 | `remove()`                | 86,291.3          | 109,352.8              | 1.27x  |            **V1**            |
 | `remove(Object)`          | 108,122.2         | 151,541.4              | 1.40x  |            **V1**            |
