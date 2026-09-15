@@ -81,7 +81,7 @@ public class CustomQueue<E> implements Queue<E> {
      * Constructs an empty queue. The {@code size} parameter is accepted
      * for API compatibility (e.g. with a capacity-based constructor) but
      * has no effect, since this linked-list implementation has no fixed
-     * or preallocated capacity.
+     * or pre-allocated capacity.
      *
      * @param size must be non-negative; otherwise unused
      * @throws IllegalArgumentException if {@code size} is negative
@@ -105,11 +105,11 @@ public class CustomQueue<E> implements Queue<E> {
      */
     public CustomQueue(final Collection<? extends E> c) {
         requireNonNull(c);
-        for(E e : c)
+        for (E e : c)
             requireNonNull(e);
-        for(E e : c) {
+        for (E e : c) {
             Node<E> newNode = new Node<>(e);
-            if(head == null)
+            if (head == null)
                 head = tail = newNode;
             else {
                 tail.next = newNode;
@@ -129,7 +129,7 @@ public class CustomQueue<E> implements Queue<E> {
     public boolean add(final E item) {
         requireNonNull(item);
         Node<E> newNode = new Node<>(item);
-        if(head == null)
+        if (head == null)
             head = tail = newNode;
         else {
             tail.next = newNode;
@@ -154,7 +154,7 @@ public class CustomQueue<E> implements Queue<E> {
     public boolean addAll(final Collection<? extends E> c) {
         if (c == null)
             throw new NullPointerException();
-        if(c == this)
+        if (c == this)
             throw new IllegalArgumentException();
         if (c.isEmpty())
             return false;
@@ -186,14 +186,14 @@ public class CustomQueue<E> implements Queue<E> {
      * @return {@code true} if this queue contains the specified element
      */
     public boolean contains(final Object o) {
-        if(o == null || size == 0)
+        if (o == null || size == 0)
             return false;
         Node<E> current = head;
-        if(current.value.equals(o))
+        if (current.value.equals(o))
             return true;
-        while(current.next != null) {
+        while (current.next != null) {
             current = current.next;
-            if(current.value.equals(o))
+            if (current.value.equals(o))
                 return true;
         }
         return false;
@@ -235,7 +235,7 @@ public class CustomQueue<E> implements Queue<E> {
      * @throws NoSuchElementException if this queue is empty
      */
     public E element() {
-        if(size == 0)
+        if (size == 0)
             throw new NoSuchElementException();
         return head.value;
     }
@@ -299,11 +299,11 @@ public class CustomQueue<E> implements Queue<E> {
      * @return the head of this queue, or {@code null} if this queue is empty
      */
     public E poll() {
-        if(size == 0)
+        if (size == 0)
             return null;
         E value = head.value;
         head = head.next;
-        if(head == null)
+        if (head == null)
             tail = null;
         size--;
         modCount++;
@@ -320,7 +320,7 @@ public class CustomQueue<E> implements Queue<E> {
      * @throws NoSuchElementException if this queue is empty
      */
     public E remove() {
-        if(isEmpty())
+        if (isEmpty())
             throw new NoSuchElementException();
         return poll();
     }
@@ -336,18 +336,18 @@ public class CustomQueue<E> implements Queue<E> {
      * @return {@code true} if this queue contained the specified element
      */
     public boolean remove(final Object o) {
-        if(size == 0)
+        if (size == 0)
             return false;
-        if(head.value.equals(o)) {
+        if (head.value.equals(o)) {
             head = head.next;
-            if(head == null)
+            if (head == null)
                 tail = null;
             size--;
             modCount++;
             return true;
         }
         Node<E> node = head;
-        while(node.next != null) {
+        while (node.next != null) {
             if (node.next.value.equals(o)) {
                 unlinkNext(node);
                 return true;
@@ -412,7 +412,7 @@ public class CustomQueue<E> implements Queue<E> {
      */
     public boolean retainAll(final Collection<?> c) {
         requireNonNull(c);
-        if(c.isEmpty()) {
+        if (c.isEmpty()) {
             boolean modified = !isEmpty();
             clear();
             return modified;
@@ -421,9 +421,9 @@ public class CustomQueue<E> implements Queue<E> {
         boolean modified = false;
         Node<E> node = head;
         Node<E> previous = null;
-        while(node != null) {
+        while (node != null) {
             Node<E> next = node.next;
-            if(!retain.contains(node.value)) {
+            if (!retain.contains(node.value)) {
                 if (node == head)
                     head = next;
                 else
@@ -461,7 +461,7 @@ public class CustomQueue<E> implements Queue<E> {
     public Object[] toArray() {
         Object[] array = new Object[size];
         int index = 0;
-        for(Node<E> node = head; node != null; node = node.next)
+        for (Node<E> node = head; node != null; node = node.next)
             array[index++] = node.value;
         return array;
     }
@@ -486,12 +486,12 @@ public class CustomQueue<E> implements Queue<E> {
      * @throws NullPointerException if the specified array is {@code null}
      */
     public <T> T[] toArray(T[] a) {
-        if(a.length < size)
+        if (a.length < size)
             a = (T[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
         int index = 0;
-        for(Node<E> x = head; x != null; x = x.next)
+        for (Node<E> x = head; x != null; x = x.next)
             a[index++] = (T) x.value;
-        if(a.length > size)
+        if (a.length > size)
             a[size] = null;
         return a;
     }
@@ -506,12 +506,12 @@ public class CustomQueue<E> implements Queue<E> {
      * @return a string representation of this queue
      */
     public String toString() {
-        if(isEmpty())
+        if (isEmpty())
             return "[]";
         StringBuilder stringBuilder = new StringBuilder("[");
         boolean first = true;
-        for(Node<E> x = head; x != null; x = x.next) {
-            if(!first)
+        for (Node<E> x = head; x != null; x = x.next) {
+            if (!first)
                 stringBuilder.append(", ");
             stringBuilder.append(x.value);
             first = false;
@@ -590,25 +590,25 @@ public class CustomQueue<E> implements Queue<E> {
          */
         CustomListIterator(final int index) {
             nextIndex = index;
-            if(size == 0) {
+            if (size == 0) {
                 next = null;
                 prev = null;
                 return;
             }
-            if(index == 0) {
+            if (index == 0) {
                 next = head;
                 prev = null;
                 return;
             }
-            if(index == size) {
+            if (index == size) {
                 next = null;
                 prev = head;
-                for(int i = 1; i < size; i++)
+                for (int i = 1; i < size; i++)
                     prev = prev.next;
                 return;
             }
             Node<E> current = head;
-            for(int i = 0; i < index; i++)
+            for (int i = 0; i < index; i++)
                 current = current.next;
             next = current;
             prev = getNodeAt(index - 1);
@@ -633,14 +633,14 @@ public class CustomQueue<E> implements Queue<E> {
             checkForComodification();
             requireNonNull(e);
             Node<E> newNode = new Node<>(e);
-            if(next == null)
-                if(tail == null)
+            if (next == null)
+                if (tail == null)
                     head = tail = newNode;
                 else {
                     tail.next = newNode;
                     tail = newNode;
                 }
-            else if(next == head) {
+            else if (next == head) {
                 newNode.next = head;
                 head = newNode;
             } else {
@@ -688,7 +688,7 @@ public class CustomQueue<E> implements Queue<E> {
          */
         public E next() {
             checkForComodification();
-            if(!hasNext())
+            if (!hasNext())
                 throw new NoSuchElementException();
             lastReturned = next;
             prev = lastReturned;
@@ -723,7 +723,7 @@ public class CustomQueue<E> implements Queue<E> {
          */
         public E previous() {
             checkForComodification();
-            if(!hasPrevious())
+            if (!hasPrevious())
                 throw new NoSuchElementException();
             lastReturned = prev;
             next = lastReturned;
@@ -758,21 +758,21 @@ public class CustomQueue<E> implements Queue<E> {
          */
         public void remove() {
             checkForComodification();
-            if(lastReturned == null)
+            if (lastReturned == null)
                 throw new IllegalStateException();
-            if(lastReturned == head) {
+            if (lastReturned == head) {
                 head = head.next;
                 if (head == null)
                     tail = null;
             } else {
                 Node<E> before = (prev == lastReturned) ? getNodeAt(nextIndex - 2) : prev;
-                if(before == null)
+                if (before == null)
                     throw new IllegalStateException();
                 before.next = lastReturned.next;
-                if(lastReturned == tail)
+                if (lastReturned == tail)
                     tail = before;
             }
-            if(next == lastReturned)
+            if (next == lastReturned)
                 next = lastReturned.next;
             else
                 nextIndex--;
@@ -799,7 +799,7 @@ public class CustomQueue<E> implements Queue<E> {
          */
         public void set(final E e) {
             checkForComodification();
-            if(lastReturned == null)
+            if (lastReturned == null)
                 throw new IllegalStateException();
             requireNonNull(e);
             lastReturned.value = e;
