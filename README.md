@@ -56,6 +56,10 @@ Implementation of a Java Queue using a singly LinkedList.
 | **`toArray(T[])`**              |      $O(N)$       |         $O(N)$         |  Tie   |
 | **`toString()`**                |      $O(N)$       |         $O(N)$         |  Tie   |
 
+**Notes**:
+- **n**: Total number of elements currently in the queue.
+- **m**: Number of elements in the input collection.
+
 # Performance Comparison
 
 Geometric mean (ns/op) across all tested collection sizes (10,000–100,000 elements). Margins under 1.10x are treated as noise-level ties since the source data has no per-run error/variance to test true statistical significance.
