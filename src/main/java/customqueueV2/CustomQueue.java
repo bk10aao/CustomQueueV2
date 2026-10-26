@@ -152,8 +152,7 @@ public class CustomQueue<E> implements Queue<E> {
      * @throws IllegalArgumentException if the specified collection is this queue
      */
     public boolean addAll(final Collection<? extends E> c) {
-        if (c == null)
-            throw new NullPointerException();
+        requireNonNull(c);
         if (c == this)
             throw new IllegalArgumentException();
         if (c.isEmpty())
@@ -170,10 +169,11 @@ public class CustomQueue<E> implements Queue<E> {
      * garbage collection.
      */
     public void clear() {
-        if (!isEmpty())
+        if (head != null) {
             modCount++;
-        head = tail = null;
-        size = 0;
+            head = tail = null;
+            size = 0;
+        }
     }
 
     /**
@@ -209,8 +209,7 @@ public class CustomQueue<E> implements Queue<E> {
      * @throws NullPointerException if the specified collection is {@code null}
      */
     public boolean containsAll(final Collection<?> c) {
-        if (c == null)
-            throw new NullPointerException();
+        requireNonNull(c);
         if (c.isEmpty())
             return true;
         Set<?> values = (c instanceof Set<?> s) ? s : new HashSet<>(c);
@@ -489,8 +488,8 @@ public class CustomQueue<E> implements Queue<E> {
         if (a.length < size)
             a = (T[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
         int index = 0;
-        for (Node<E> x = head; x != null; x = x.next)
-            a[index++] = (T) x.value;
+        for (Node<E> node = head; node != null; node = node.next)
+            a[index++] = (T) node.value;
         if (a.length > size)
             a[size] = null;
         return a;
